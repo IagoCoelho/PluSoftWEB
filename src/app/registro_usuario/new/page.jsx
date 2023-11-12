@@ -6,19 +6,24 @@ import InputText from "@/components/InputText";
 import NavBar from "@/components/NavBar";
 import { CheckIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { redirect } from 'next/navigation'
-
+import { useRouter } from 'next/router'; 
 
 export default function FormUsuarios() {
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState("");
+    const router = useRouter();  
 
-    async function handleSubmit(formData){
-        const resp = await create(formData)
-        if(resp.message){
-            setMessage(resp.message)
-            return
+    async function handleSubmit(event) {
+        event.preventDefault();  
+
+        const formData = new FormData(event.target);
+        const resp = await create(formData);
+
+        if (resp.message) {
+            setMessage(resp.message);
+            return;
         }
-        redirect("/usuarios")
+
+        router.push("/usuarios");  
     }
 
     return (
@@ -27,16 +32,16 @@ export default function FormUsuarios() {
 
             <main className="bg-slate-900 mt-10 p-12 rounded-xl max-w-lg m-auto">
                 <h2 className="text-2xl font-bold">Cadastrar Usuario</h2>
-                <form action={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <InputText name="nome" id="nome" label="nome" />
-                    <InputText name="saldo_inicial" id="saldoInicial" label="saldo inicial" type="number" inputmode="decimal" />
+                    <InputText name="email" id="email" label="email" />
                     <InputText name="icone" id="icone" label="ícone" />
 
                     <div className="flex justify-around mt-4">
                         <Button href="/usuarios" variant="secundary" icon={<ArrowLeftIcon className="h-6 w-6" />}>
                             cancelar
                         </Button>
-                        <Button element="button" icon={<CheckIcon className="h-6 w-6" />}>
+                        <Button type="submit" icon={<CheckIcon className="h-6 w-6" />}>
                             salvar
                         </Button>
                     </div>
@@ -44,5 +49,5 @@ export default function FormUsuarios() {
                 <p>{message}</p>
             </main>
         </>
-    )
+    );
 }

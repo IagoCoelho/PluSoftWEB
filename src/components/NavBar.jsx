@@ -10,12 +10,12 @@ export default function NavBar({active}) {
                     </a>
                 </li>
                 <li>
-                    <Link className={active=="registro_usuario" && "text-slate-300"} href="/registro_usuario">
+                    <Link className={active=="usuarios" && "text-slate-300"} href="/usuarios">
                         Registro Usuario
                     </Link>
                 </li>
                 <li>
-                    <Link className={active=="cadastro_feedback" && "text-slate-300"} href="/cadastro_feedback">
+                    <Link className={active=="feedbacks" && "text-slate-300"} href="/feedbacks">
                         Cadastro Feddback
                     </Link>
                 </li>

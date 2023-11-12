@@ -29,7 +29,7 @@ export default function FormFeedbacks() {
                 <h2 className="text-2xl font-bold">Cadastrar Feedback</h2>
                 <form action={handleSubmit}>
                     <InputText name="nome" id="nome" label="nome" />
-                    <InputText name="saldo_inicial" id="saldoInicial" label="saldo inicial" type="number" inputmode="decimal" />
+                    <InputText name="feedback" id="feedback" />
                     <InputText name="icone" id="icone" label="ícone" />
 
                     <div className="flex justify-around mt-4">
